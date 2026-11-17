@@ -76,8 +76,6 @@ app.get('/empleados', (req, res) => {
         }
     });
 });
-
-
 app.listen(3001, () => {
   console.log('Servidor corriendo en el puerto 3001');
 });
