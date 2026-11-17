@@ -449,7 +449,6 @@ body {
   cursor: default;
 }
 
-/* Botones de acción (ver / editar / eliminar) */
 .btn-icono {
   display: inline-flex;
   align-items: center;
@@ -476,7 +475,6 @@ body {
   background: #fff;
 }
 
-/* Panel izquierdo azul */
 .login-izq {
   position: relative;
   flex: 1.1;
@@ -521,7 +519,6 @@ body {
   margin: 0;
 }
 
-/* Panel derecho blanco */
 .login-der {
   flex: 1;
   display: flex;
