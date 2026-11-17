@@ -17,7 +17,6 @@ const db = mysql.createPool({
   database: 'empleados'
 });
 
-// Helper: responde con error 500 si falla la consulta
 const responder = (res, mensaje) => (err, result) => {
   if (err) {
     console.log(err);
@@ -26,7 +25,6 @@ const responder = (res, mensaje) => (err, result) => {
   res.send(mensaje !== undefined ? mensaje : result);
 };
 
-/*LOGIN Y REGISTRO*/
 
 app.post('/login', (req, res) => {
   const { usuario, password } = req.body;
@@ -73,7 +71,6 @@ app.post('/registro', (req, res) => {
   });
 });
 
-// Todo lo que está debajo de este middleware requiere token
 app.use((req, res, next) => {
   const header = req.headers.authorization || '';
   const token = header.startsWith('Bearer ') ? header.slice(7) : null;
@@ -86,7 +83,6 @@ app.use((req, res, next) => {
   }
 });
 
-/*EMPLEADOS*/
 
 app.get('/empleados', (req, res) => {
   db.query('SELECT * FROM empleado', responder(res));
@@ -114,8 +110,6 @@ app.delete('/delete/:id', (req, res) => {
   db.query('DELETE FROM empleado WHERE id = ?', [req.params.id], responder(res, 'Empleado eliminado'));
 });
 
-/*PROYECTOS*/
-
 app.get('/proyectos', (req, res) => {
   db.query('SELECT * FROM proyectos', responder(res));
 });
@@ -141,8 +135,6 @@ app.put('/proyectos', (req, res) => {
 app.delete('/proyectos/:id', (req, res) => {
   db.query('DELETE FROM proyectos WHERE id = ?', [req.params.id], responder(res, 'Proyecto eliminado'));
 });
-
-/*SALARIOS*/
 
 app.get('/salarios', (req, res) => {
   db.query(
@@ -176,8 +168,6 @@ app.put('/salarios', (req, res) => {
 app.delete('/salarios/:id', (req, res) => {
   db.query('DELETE FROM salario WHERE id = ?', [req.params.id], responder(res, 'Salario eliminado'));
 });
-
-/*ASIGNACIONES*/
 
 app.get('/asignaciones', (req, res) => {
   db.query(
@@ -221,9 +211,6 @@ app.delete('/asignaciones/:empleado_id/:proyecto_id', (req, res) => {
   );
 });
 
-<<<<<<< HEAD
-
-
 app.delete('/delete/:id', (req, res) => {
   const id = req.params.id;
 
@@ -245,8 +232,7 @@ app.get('/empleados', (req, res) => {
         }
     });
 });
-=======
->>>>>>> origin/master
+
 app.listen(3001, () => {
   console.log('Servidor corriendo en el puerto 3001');
 });
